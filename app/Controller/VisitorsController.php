@@ -18,12 +18,15 @@ class VisitorsController extends AppController {
         $this->loadModel('Category');
         $category = $this->Category->findById($id);
         $category_articles = $this->Article->findAllByCategoryId($id);
+        $this->set('category', $category);
         $this->set('category_articles', $category_articles);
     }
 
     public function monthly($year, $month) {
         $monthly_articles = $this->Article->getMonthlyArticles($year, $month);
         $this->set('monthly_articles', $monthly_articles);
+        $this->set('year', $year);
+        $this->set('month', $month);
     }
 
     public function beforeRender()
